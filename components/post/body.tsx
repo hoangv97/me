@@ -1,4 +1,4 @@
-import { NotionBlock } from '../notion';
+import NotionBlock from './notion-block';
 import markdownStyles from './markdown-styles.module.scss';
 
 type Props = {

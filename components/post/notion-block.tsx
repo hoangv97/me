@@ -1,13 +1,13 @@
-import { parseRichText } from '../../../lib/notion';
+import { parseRichText } from '../../lib/notion';
 
 interface BlockProps {
   data: any;
 }
 
-const Block = ({ data }: BlockProps) => {
+const NotionBlock = ({ data }: BlockProps) => {
   // console.log(data);
 
-  const { id, type, has_children } = data;
+  const { type } = data;
   const value = data[type];
 
   switch (type) {
@@ -57,4 +57,4 @@ const Block = ({ data }: BlockProps) => {
   }
 };
 
-export default Block;
+export default NotionBlock;
