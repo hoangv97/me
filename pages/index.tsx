@@ -1,6 +1,6 @@
 import Container from '../components/container';
 import MoreStories from '../components/more-stories';
-import HeroPost from '../components/hero-post';
+import HeroPost from '../components/post/hero';
 import Intro from '../components/intro';
 import Layout from '../components/layout';
 import { getAllPosts } from '../lib/api';
@@ -28,7 +28,6 @@ const Index = ({ allPosts }: Props) => {
               title={heroPost.title}
               coverImage={heroPost.coverImage}
               date={heroPost.date}
-              author={heroPost.author}
               slug={heroPost.slug}
               excerpt={heroPost.excerpt}
             />
@@ -42,7 +41,7 @@ const Index = ({ allPosts }: Props) => {
 
 export default Index;
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   const allPosts = await getAllPosts();
 
   return {

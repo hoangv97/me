@@ -5,25 +5,25 @@ import PostBody from '../../components/post/body';
 import Header from '../../components/header';
 import PostHeader from '../../components/post/header';
 import Layout from '../../components/layout';
-import { getPostBySlug, getAllPosts } from '../../lib/api';
+import { getPostBySlug, getAllPosts, getTagBySlug } from '../../lib/api';
 import PostTitle from '../../components/post/title';
 import Head from 'next/head';
 import { TITLE } from '../../lib/constants';
 import PostType from '../../types/post';
+import TagType from '../../types/tag';
+import MoreStories from '../../components/more-stories';
 
 type Props = {
-  post: PostType;
-  morePosts: PostType[];
-  preview?: boolean;
+  tag: TagType;
 };
 
-const Post = ({ post, morePosts, preview }: Props) => {
+const Post = ({ tag }: Props) => {
   const router = useRouter();
-  if (!router.isFallback && !post?.slug) {
+  if (!router.isFallback && !tag?.slug) {
     return <ErrorPage statusCode={404} />;
   }
   return (
-    <Layout preview={preview}>
+    <Layout>
       <Container>
         <Header />
         {router.isFallback ? (
@@ -31,19 +31,7 @@ const Post = ({ post, morePosts, preview }: Props) => {
         ) : (
           <>
             <article className="mb-32">
-              <Head>
-                <title>
-                  {post.title} | {TITLE}
-                </title>
-                <meta property="og:image" content={post.ogImage.url} />
-              </Head>
-              <PostHeader
-                title={post.title}
-                coverImage={post.coverImage}
-                date={post.date}
-                tags={post.tags}
-              />
-              <PostBody content={post.content} />
+              <MoreStories posts={tag.posts} title={tag.name} />
             </article>
           </>
         )}
@@ -61,12 +49,12 @@ type Params = {
 };
 
 export async function getServerSideProps({ params }: Params) {
-  const post = await getPostBySlug(params.slug);
+  const tag = await getTagBySlug(params.slug);
 
   return {
     props: {
-      post: {
-        ...post,
+      tag: {
+        ...tag,
       },
     },
   };

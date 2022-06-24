@@ -47,7 +47,7 @@ const Block = ({ data }: BlockProps) => {
     case 'bookmark':
       let url = value.type ? value[value.type].url : value.url;
       return (
-        <a href={url} target="_blank" className="text-blue-600">
+        <a href={url} target="_blank" className="text-blue-600 hover:underline">
           {url}
         </a>
       );
