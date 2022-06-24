@@ -1,5 +1,5 @@
+import { NotionBlock } from '../notion';
 import markdownStyles from './markdown-styles.module.scss';
-import Block from '../notion/block';
 
 type Props = {
   content: any[];
@@ -11,7 +11,7 @@ const PostBody = ({ content }: Props) => {
       <div className={markdownStyles.markdown}>
         {content.map((block) => (
           <div key={block.id}>
-            <Block data={block} />
+            <NotionBlock data={block} />
           </div>
         ))}
       </div>
