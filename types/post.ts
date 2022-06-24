@@ -10,7 +10,7 @@ type PostType = {
   ogImage: {
     url: string
   }
-  content: string
+  content: any[]
 }
 
 export default PostType
