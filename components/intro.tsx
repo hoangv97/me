@@ -5,7 +5,7 @@ const Intro = () => {
         Blog.
       </h1>
       <h4 className="text-center md:text-left text-lg mt-5 md:pl-8">
-        A statically generated blog
+        A coding blog
       </h4>
     </section>
   );
