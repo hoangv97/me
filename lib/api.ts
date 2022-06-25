@@ -16,7 +16,6 @@ function parsePost(page: any) {
     date: page.properties['Publication time'].date?.start ?? page.properties['Last edited time'].last_edited_time,
     slug: slugify(title, { lower: true }) + '-' + page.id.replaceAll('-', ''),
     coverImage: page.cover ? page.cover[page.cover.type].url : `/assets/images/cover${randomIntFromInterval(1, 3)}.jpg`,
-    excerpt: parseRichText(page.properties.Excerpt.rich_text, { textOnly: true }).join(' '),
     tags: page.properties.Tags.multi_select.map((tag: any) =>
     ({
       ...tag,

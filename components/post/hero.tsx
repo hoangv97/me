@@ -6,11 +6,10 @@ type Props = {
   title: string;
   coverImage: string;
   date: string;
-  excerpt: string;
   slug: string;
 };
 
-const HeroPost = ({ title, coverImage, date, excerpt, slug }: Props) => {
+const HeroPost = ({ title, coverImage, date, slug }: Props) => {
   return (
     <section>
       <div className="mb-8 md:mb-16">
@@ -26,10 +25,6 @@ const HeroPost = ({ title, coverImage, date, excerpt, slug }: Props) => {
           <div className="mb-4 md:mb-0 text-lg">
             <DateFormatter dateString={date} />
           </div>
-        </div>
-        <div>
-          <p className="text-lg leading-relaxed mb-4">{excerpt}</p>
-          {/* <Avatar name={author.name} picture={author.picture} /> */}
         </div>
       </div>
     </section>

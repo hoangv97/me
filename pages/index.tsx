@@ -29,7 +29,6 @@ const Index = ({ allPosts }: Props) => {
               coverImage={heroPost.coverImage}
               date={heroPost.date}
               slug={heroPost.slug}
-              excerpt={heroPost.excerpt}
             />
           )}
           {morePosts.length > 0 && <MoreStories posts={morePosts} />}
