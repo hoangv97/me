@@ -8,7 +8,7 @@ type Props = {
 const Tag = ({ tag }: Props) => {
   return (
     <Link as={`/tags/${tag.slug}`} href="/tags/[slug]">
-      <a className="hover:underline mr-4">{tag.name}</a>
+      <a className="hover:underline text-blue-400">{tag.name}</a>
     </Link>
   );
 };

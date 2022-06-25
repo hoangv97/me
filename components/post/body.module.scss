@@ -1,4 +1,4 @@
-.markdown {
+.body {
   @apply text-lg leading-relaxed;
 
   h1 {
@@ -20,5 +20,10 @@
   img, 
   video {
     @apply my-6;
+  }
+
+  ul, ol {
+    @apply list-disc;
+    padding-inline-start: 40px;
   }
 }

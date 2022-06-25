@@ -1,5 +1,5 @@
 import NotionBlock from './notion-block';
-import markdownStyles from './markdown-styles.module.scss';
+import bodyStyles from './body.module.scss';
 
 type Props = {
   content: any[];
@@ -8,7 +8,7 @@ type Props = {
 const PostBody = ({ content }: Props) => {
   return (
     <div className="max-w-2xl mx-auto">
-      <div className={markdownStyles.markdown}>
+      <div className={bodyStyles.body}>
         {content.map((block) => (
           <div key={block.id}>
             <NotionBlock data={block} />

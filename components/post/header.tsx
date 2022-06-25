@@ -20,8 +20,12 @@ const PostHeader = ({ title, coverImage, date, tags }: Props) => {
       </div>
       <div className="max-w-2xl mx-auto">
         <div className="mb-6 text-lg">
+          Tags:{' '}
           {tags.map((tag, i) => (
-            <Tag key={i} tag={tag} />
+            <>
+              <Tag key={i} tag={tag} />
+              {i < tags.length - 1 && ', '}
+            </>
           ))}
         </div>
         <div className="mb-6 text-lg">

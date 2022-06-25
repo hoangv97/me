@@ -1,4 +1,5 @@
 import { parseRichText } from '../../lib/notion';
+import SyntaxHighlighter from 'react-syntax-highlighter';
 
 interface BlockProps {
   data: any;
@@ -19,11 +20,23 @@ const NotionBlock = ({ data }: BlockProps) => {
       return <h2>{parseRichText(value.rich_text)}</h2>;
     case 'heading_3':
       return <h3>{parseRichText(value.rich_text)}</h3>;
+    case 'bulleted_list_item':
+      return (
+        <ul>
+          <li>{parseRichText(value.rich_text)}</li>
+        </ul>
+      );
     case 'code':
       return (
-        <pre>
+        <pre className="bg-gray-100 px-5 py-3">
           <code>
-            {!!value.rich_text.length && value.rich_text[0].plain_text}
+            <SyntaxHighlighter
+              language={value.language}
+              customStyle={{ background: 'transparent' }}
+              showLineNumbers
+            >
+              {!!value.rich_text.length && value.rich_text[0].plain_text}
+            </SyntaxHighlighter>
           </code>
         </pre>
       );
@@ -52,7 +65,7 @@ const NotionBlock = ({ data }: BlockProps) => {
         </a>
       );
     default:
-      // console.log('Unsupported', data);
+      console.log('Unsupported', data);
       return <p className="text-red-600">Unsupported</p>;
   }
 };

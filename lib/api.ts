@@ -24,6 +24,28 @@ function parsePost(page: any) {
   }
 }
 
+const getPostsFilter: any[] = [
+  {
+    "property": "Status",
+    "select": {
+      "equals": "Published 🚀"
+    }
+  },
+  {
+    "property": "Platforms",
+    "multi_select": {
+      "contains": 'Coding Blog'
+    }
+  },
+]
+
+const getPostsSort: any[] = [
+  {
+    property: 'Publication time',
+    direction: 'descending',
+  },
+]
+
 export async function getPostBySlug(slug: string) {
   const pageId = slug.split('-').reverse()[0]
   const response = await notion.pages.retrieve({ page_id: pageId });
@@ -49,20 +71,10 @@ export async function getAllPosts() {
     database_id: databaseId,
     filter: {
       and: [
-        {
-          "property": "Status",
-          "select": {
-            "equals": "Published 🚀"
-          }
-        },
+        ...getPostsFilter
       ],
     },
-    sorts: [
-      {
-        property: 'Publication time',
-        direction: 'descending',
-      },
-    ],
+    sorts: getPostsSort,
     page_size: 100,
   });
   // console.log(response);
@@ -77,12 +89,7 @@ export async function getTagBySlug(slug: string) {
     database_id: databaseId,
     filter: {
       and: [
-        {
-          "property": "Status",
-          "select": {
-            "equals": "Published 🚀"
-          }
-        },
+        ...getPostsFilter,
         {
           "property": "Tags",
           "multi_select": {
@@ -91,12 +98,7 @@ export async function getTagBySlug(slug: string) {
         },
       ],
     },
-    sorts: [
-      {
-        property: 'Publication time',
-        direction: 'descending',
-      },
-    ],
+    sorts: getPostsSort,
     page_size: 100,
   });
   // console.log(response);
