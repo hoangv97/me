@@ -3,6 +3,7 @@ import CoverImage from './cover-image';
 import PostTitle from './title';
 import TagType from '../../types/tag';
 import Tag from './tag';
+import { Fragment } from 'react';
 
 type Props = {
   title: string;
@@ -22,10 +23,10 @@ const PostHeader = ({ title, coverImage, date, tags }: Props) => {
         <div className="mb-6 text-lg">
           Tags:{' '}
           {tags.map((tag, i) => (
-            <>
-              <Tag key={i} tag={tag} />
+            <Fragment key={i}>
+              <Tag tag={tag} />
               {i < tags.length - 1 && ', '}
-            </>
+            </Fragment>
           ))}
         </div>
         <div className="mb-6 text-lg">

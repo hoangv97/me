@@ -1,6 +1,11 @@
-import { AppProps } from 'next/app'
-import '../styles/index.css'
+import { AppProps } from 'next/app';
+import '../styles/index.css';
 
-export default function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+interface CustomAppProps extends AppProps {
+  Component: any;
+  pageProps: any;
+}
+
+export default function MyApp({ Component, pageProps }: CustomAppProps) {
+  return <Component {...pageProps} />;
 }
