@@ -4,19 +4,32 @@ import slugify from 'slugify';
 
 const notion = new Client({ auth: process.env.NOTION_API_KEY });
 
+const fields = {
+  publicationTime: 'Publication time',
+  title: 'Title',
+  tags: 'Tags',
+  status: 'Status',
+  platforms: 'Platforms',
+  lastEditedTime: 'Last edited time'
+}
+
+const publishedStatus = process.env.PUBLISHED_STATUS
+
+const platformValue = process.env.PLATFORM
+
 function randomIntFromInterval(min: number, max: number) { // min and max included 
   return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
 function parsePost(page: any) {
   // console.log(page)
-  const title = parseRichText(page.properties.Title.title, { textOnly: true }).join(' ');
+  const title = parseRichText(page.properties[fields.title].title, { textOnly: true }).join(' ');
   return {
     title,
-    date: page.properties['Publication time'].date?.start ?? page.properties['Last edited time'].last_edited_time,
+    date: page.properties[fields.publicationTime].date?.start ?? page.properties[fields.lastEditedTime].last_edited_time,
     slug: slugify(title, { lower: true }) + '-' + page.id.replaceAll('-', ''),
     coverImage: page.cover ? page.cover[page.cover.type].url : `/assets/images/cover${randomIntFromInterval(1, 3)}.jpg`,
-    tags: page.properties.Tags.multi_select.map((tag: any) =>
+    tags: page.properties[fields.tags].multi_select.map((tag: any) =>
     ({
       ...tag,
       slug: tag.name,
@@ -26,22 +39,22 @@ function parsePost(page: any) {
 
 const getPostsFilter: any[] = [
   {
-    "property": "Status",
+    "property": fields.status,
     "select": {
-      "equals": "Published 🚀"
+      "equals": publishedStatus
     }
   },
   {
-    "property": "Platforms",
+    "property": fields.platforms,
     "multi_select": {
-      "contains": 'Coding Blog'
+      "contains": platformValue
     }
   },
 ]
 
 const getPostsSort: any[] = [
   {
-    property: 'Publication time',
+    property: fields.publicationTime,
     direction: 'descending',
   },
 ]
@@ -91,7 +104,7 @@ export async function getTagBySlug(slug: string) {
       and: [
         ...getPostsFilter,
         {
-          "property": "Tags",
+          "property": fields.tags,
           "multi_select": {
             "contains": slug
           }

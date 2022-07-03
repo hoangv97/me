@@ -8,7 +8,7 @@ import Layout from '../../components/layout';
 import { getPostBySlug, getAllPosts } from '../../lib/api';
 import PostTitle from '../../components/post/title';
 import Head from 'next/head';
-import { TITLE } from '../../lib/constants';
+import { PAGE_TITLE } from '../../lib/constants';
 import PostType from '../../types/post';
 
 type Props = {
@@ -33,7 +33,7 @@ const Post = ({ post, morePosts, preview }: Props) => {
             <article className="mb-32">
               <Head>
                 <title>
-                  {post.title} | {TITLE}
+                  {post.title} | {PAGE_TITLE}
                 </title>
                 <meta property="og:image" content={post.ogImage.url} />
               </Head>

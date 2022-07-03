@@ -5,7 +5,7 @@ import Intro from '../components/intro';
 import Layout from '../components/layout';
 import { getAllPosts } from '../lib/api';
 import Head from 'next/head';
-import { TITLE } from '../lib/constants';
+import { WEB_TITLE } from '../lib/constants';
 import Post from '../types/post';
 
 type Props = {
@@ -19,7 +19,7 @@ const Index = ({ allPosts }: Props) => {
     <>
       <Layout>
         <Head>
-          <title>{TITLE}</title>
+          <title>{WEB_TITLE}</title>
         </Head>
         <Container>
           <Intro />

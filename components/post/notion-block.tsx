@@ -20,6 +20,12 @@ const NotionBlock = ({ data }: BlockProps) => {
       return <h2>{parseRichText(value.rich_text)}</h2>;
     case 'heading_3':
       return <h3>{parseRichText(value.rich_text)}</h3>;
+    case 'numbered_list_item':
+      return (
+        <ol>
+          <li>{parseRichText(value.rich_text)}</li>
+        </ol>
+      );
     case 'bulleted_list_item':
       return (
         <ul>
@@ -66,7 +72,7 @@ const NotionBlock = ({ data }: BlockProps) => {
       );
     default:
       console.log('Unsupported', data);
-      return <p className="text-red-600">Unsupported</p>;
+      return null;
   }
 };
 

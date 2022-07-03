@@ -60,7 +60,7 @@ export const parseText = (data: any, config: ParseTextProps = {}) => {
       style.textDecoration = 'underline';
     }
     if (annotations.code) {
-      content = <pre>{content}</pre>;
+      content = <code>{content}</code>;
     }
 
     if (link) {

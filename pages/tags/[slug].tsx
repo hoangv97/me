@@ -1,15 +1,10 @@
 import { useRouter } from 'next/router';
 import ErrorPage from 'next/error';
 import Container from '../../components/container';
-import PostBody from '../../components/post/body';
 import Header from '../../components/header';
-import PostHeader from '../../components/post/header';
 import Layout from '../../components/layout';
-import { getPostBySlug, getAllPosts, getTagBySlug } from '../../lib/api';
+import { getTagBySlug } from '../../lib/api';
 import PostTitle from '../../components/post/title';
-import Head from 'next/head';
-import { TITLE } from '../../lib/constants';
-import PostType from '../../types/post';
 import TagType from '../../types/tag';
 import MoreStories from '../../components/more-stories';
 
