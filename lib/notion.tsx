@@ -30,8 +30,6 @@ export const parseText = (data: any, config: ParseTextProps = {}) => {
   try {
     // console.log(data);
 
-    let className = '';
-
     const { type, annotations } = data;
     const value = data[type];
 
@@ -70,7 +68,7 @@ export const parseText = (data: any, config: ParseTextProps = {}) => {
           key={key}
           href={url}
           style={style}
-          className={className}
+          className="text-blue-600 hover:underline"
           target="_blank"
         >
           {content}
@@ -78,7 +76,7 @@ export const parseText = (data: any, config: ParseTextProps = {}) => {
       );
     } else {
       return (
-        <span key={key} style={style} className={className}>
+        <span key={key} style={style}>
           {content}
         </span>
       );

@@ -8,7 +8,7 @@ import Layout from '../../components/layout';
 import { getPostBySlug, getAllPosts } from '../../lib/api';
 import PostTitle from '../../components/post/title';
 import Head from 'next/head';
-import { PAGE_TITLE } from '../../lib/constants';
+import { CACHE_CONTROL_HEADER, PAGE_TITLE } from '../../lib/constants';
 import PostType from '../../types/post';
 
 type Props = {
@@ -58,9 +58,12 @@ type Params = {
   params: {
     slug: string;
   };
+  res: any;
 };
 
-export async function getServerSideProps({ params }: Params) {
+export async function getServerSideProps({ params, res }: Params) {
+  res.setHeader('Cache-Control', CACHE_CONTROL_HEADER);
+
   const post = await getPostBySlug(params.slug);
 
   return {

@@ -7,6 +7,7 @@ import { getTagBySlug } from '../../lib/api';
 import PostTitle from '../../components/post/title';
 import TagType from '../../types/tag';
 import MoreStories from '../../components/more-stories';
+import { CACHE_CONTROL_HEADER } from '../../lib/constants';
 
 type Props = {
   tag: TagType;
@@ -41,9 +42,12 @@ type Params = {
   params: {
     slug: string;
   };
+  res: any;
 };
 
-export async function getServerSideProps({ params }: Params) {
+export async function getServerSideProps({ params, res }: Params) {
+  res.setHeader('Cache-Control', CACHE_CONTROL_HEADER);
+
   const tag = await getTagBySlug(params.slug);
 
   return {

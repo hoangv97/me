@@ -5,7 +5,7 @@ import Intro from '../components/intro';
 import Layout from '../components/layout';
 import { getAllPosts } from '../lib/api';
 import Head from 'next/head';
-import { WEB_TITLE } from '../lib/constants';
+import { CACHE_CONTROL_HEADER, WEB_TITLE } from '../lib/constants';
 import Post from '../types/post';
 
 type Props = {
@@ -40,7 +40,9 @@ const Index = ({ allPosts }: Props) => {
 
 export default Index;
 
-export const getServerSideProps = async () => {
+export const getServerSideProps = async ({ res }: any) => {
+  res.setHeader('Cache-Control', CACHE_CONTROL_HEADER);
+
   const allPosts = await getAllPosts();
 
   return {
